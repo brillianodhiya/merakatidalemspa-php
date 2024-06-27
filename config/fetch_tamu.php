@@ -5,7 +5,8 @@
         // echo("<p>ppp2</p>");
 
             $tanggal_kunjung = $_GET['tanggal_kunjung'];
-            $query = "SELECT * FROM riwayat_pelanggan WHERE tanggal_kunjung = '$tanggal_kunjung'";
+            $id_karyawan = $_GET['id_karyawan'];
+            $query = "SELECT * FROM riwayat_pelanggan WHERE tanggal_kunjung = '$tanggal_kunjung' AND id_karyawan = '$id_karyawan'";
             $result = mysqli_query($koneksi, $query);
             while ($row = mysqli_fetch_array($result)) {
                 // echo "<option value='" . $row['id_tamu'] . "'>" . $row['nama_tamu'] . "</option>";

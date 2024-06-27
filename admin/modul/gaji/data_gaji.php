@@ -9,6 +9,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal Gaji</th>
                                 <th>Kode Karyawan</th>
                                 <th>Nama Karyawan</th>
                                 <th>Gaji Bersih</th>
@@ -23,17 +24,17 @@
                             <tbody>
                                 <tr>
                                     <td><?= $no++; ?></td>
+                                    <td><?= $d['tgl_gaji']; ?></td>
                                     <td><?= $d['kode_karyawan'] ?></td>
                                     <td><?= $d['nama_karyawan'] ?></td>
                                     <td>
                                         <?php
-                                        $gaber = $d['gapok'] + $d['tunjangan'] + $d['bonus'] -
-                                            $d['potongan'];
-                                        echo rupiah($gaber);
+                                     
+                                        echo rupiah($d['total_gaji']);
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="?page=gaji&act=edit&id_gaji=<?= $d['id_gaji']; ?>" class="btn btn-warning text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a>
+                                        <!-- <a href="?page=gaji&act=edit&id_gaji=<?= $d['id_gaji']; ?>" class="btn btn-warning text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a> -->
                                         <a href="?page=gaji&act=del&id_gaji=<?= $d['id_gaji']; ?>" class="btn btn-danger text-white text-right"> <i class="fas fa-trash-alt fa-1x text-white"></i></a>
                                         <a href="modul/laporan/cetak_perkaryawan.php?gaji=<?= $_GET['gaji']; ?>&id=<?= $d['id_gaji'] ?>" target="_blank" class="btn btn-success text-white text-right"><i class="fa fa-print text-white"></i> </a>
                                     </td>

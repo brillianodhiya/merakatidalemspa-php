@@ -29,16 +29,13 @@
 
     </select>
 </div>
-
- 
                     <div class="form-group">
                     <label>Treatment</label>
                         <input 
                         type="text"
                         class="form-control"
                         name="treatment"
-                        required="required"
-                        disabled
+                        readonly
                         id="treatment"
                         >
 
@@ -65,8 +62,7 @@
                         type="text"
                         class="form-control"
                         name="harga"
-                        required="required"
-                        disabled
+                        readonly
                         id="harga"
                         >
                     </div>
@@ -89,7 +85,10 @@ function fetchTamuData(selectedDate) {
     // Menggunakan teknologi Ajax (misalnya dengan jQuery atau fetch API)
     // Kirim permintaan ke server dengan parameter tanggal
     // Tangani respons dari server dan isi dropdown nama tamu
-    console.log(selectedDate);
+    // console.log(selectedDate);
+    var id_karyawan =  <?php
+    echo $data['id_karyawan'];
+    ?>;
     // gunakan fetch GET
     var url = ""
     if (window.location.origin.includes("localhost")) {
@@ -97,8 +96,7 @@ function fetchTamuData(selectedDate) {
     } else {
         url = '/config/fetch_tamu.php?tanggal_kunjung=' + selectedDate
     }
-    console.log(url);
-    fetch(url)
+    fetch(url + "&id_karyawan=" + id_karyawan)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -147,8 +145,10 @@ if (isset($_POST['saveMasuk'])) {
   $harga = $_POST['harga'];
   $komisi = mysqli_query($koneksi, "SELECT * FROM komisi WHERE id_kom = '$id_komisi'");
   $data_komisi = mysqli_fetch_array($komisi);
-  $total_komisi = $harga * $data_komisi['persen_komisi'] / 100;    
+  $total_komisi = $harga * $data_komisi['jumlah'] / 100;    
     //query INSERT disini
+
+
   
     $save = mysqli_query($koneksi, "INSERT INTO komhar VALUES(NULL, 
     '$id_tamu', '$id_kar', '$id_komisi', '$total_komisi')");

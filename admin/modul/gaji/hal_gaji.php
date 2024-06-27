@@ -32,29 +32,36 @@ if ($cek == 0) {
                                 <th><?= $r['kode_karyawan'] ?></th>
                             </tr>
                             <tr>
-                                <th>Status Karyawan</th>
+                                <th>Bulan</th>
                                 <th>:</th>
-                                <th>
-                                    <?php if ($r['status_karyawan'] == "tetap") {
-                                        echo "Karyawan Tetap";
-                                    } else {
-                                        echo "Karyawan Kontrak";
-                                    }
-                                    ?>
-                                </th>
-                            </tr>
-                            <?php $bagian = mysqli_query($koneksi, "SELECT * FROM tb_karyawan
-                          INNER JOIN tb_bagian ON tb_karyawan.id_bagian=tb_bagian.id_bagian WHERE kode_karyawan='$id'");
-                            $b = mysqli_fetch_array($bagian); ?>
-                            <tr>
-                                <th>Bagian</th>
-                                <th>:</th>
-                                <th><?= $b['nama_bagian'] ?></th>
-                            </tr>
-                            <tr>
-                                <th>Tanggal</th>
-                                <th>:</th>
-                                <th><?= $tgl ?></th>
+                                <th><?php
+                                $bln = date('m');
+                                if ($bln == 1) {
+                                    echo "Januari";
+                                } elseif ($bln == 2) {
+                                    echo "Februari";
+                                } elseif ($bln == 3) {
+                                    echo "Maret";
+                                } elseif ($bln == 4) {
+                                    echo "April";
+                                } elseif ($bln == 5) {
+                                    echo "Mei";
+                                } elseif ($bln == 6) {
+                                    echo "Juni";
+                                } elseif ($bln == 7) {
+                                    echo "Juli";
+                                } elseif ($bln == 8) {
+                                    echo "Agustus";
+                                } elseif ($bln == 9) {
+                                    echo "September";
+                                } elseif ($bln == 10) {
+                                    echo "Oktober";
+                                } elseif ($bln == 11) {
+                                    echo "November";
+                                } elseif ($bln == 12) {
+                                    echo "Desember";
+                                }
+                                 ?></th>
                             </tr>
                         </table>
                     </span>
@@ -65,14 +72,44 @@ if ($cek == 0) {
     <form action="" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="id_karyawan" value="<?= $r['id_karyawan'] ?>">
         <?php
-        $tunjangan = mysqli_query($koneksi, "SELECT * FROM tb_tunjangan WHERE id_tunjangan");
-        $t = mysqli_fetch_array($tunjangan);
-        ?>
+        $idKaryawan = $r['id_karyawan'];
+        $absensiQuery = mysqli_query($koneksi, "SELECT * FROM tb_absenkaryawan WHERE id_karyawan='$idKaryawan' AND MONTH(tgl_absensi) = MONTH(CURRENT_DATE())");
+        // $abs = mysqli_fetch_array($absensiQuery);
+        $totalMasuk = 0;
+        $totalIzin = 0;
+        $totalTidakValid = 0;
+        while ($abs = mysqli_fetch_array($absensiQuery)) {
+            # code...
+            if ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] == 'hadir') {
+                $totalMasuk++;
+            } elseif ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] != 'hadir') {
+                $totalIzin++;
+            } elseif ($abs['valid_absensi'] == "N") {
+                $totalTidakValid++;
+            }
+        }
 
-        <?php
-        $tunjangan = mysqli_query($koneksi, "SELECT SUM(jumlah_tunjangan) as tunjangan FROM tb_tunjangan INNER JOIN tb_tunjangankaryawan ON tb_tunjangan.id_tunjangan = tb_tunjangankaryawan.id_tunjangan WHERE id_karyawan='$r[id_karyawan]' ");
-        $row_tunjangan = mysqli_fetch_array($tunjangan);
-        $total = $row_tunjangan['tunjangan'];
+        // buat query mengambil data dari table riwayat_pelanggan dengan Where id_karyawan dan bulan nya sekarang, dan juga lakukan join dengan table komhar menggunakan id_tamu sebagai foreign_key untuk kemudian mengambil total_komisi
+        $queryListKomisi = mysqli_query($koneksi, "SELECT rp.*, kh.total_komisi, kc.kode_komisi
+    FROM riwayat_pelanggan rp
+    JOIN komhar kh ON rp.id_tamu = kh.id_tamu
+    JOIN komisi kc ON kh.id_kom = kc.id_kom WHERE rp.id_karyawan='$idKaryawan' AND MONTH(rp.tanggal_kunjung) = MONTH(CURRENT_DATE())");
+        $totalKomisi = 0;
+        $countKomisi = 0;
+        $kalimatkomisi = "";
+        while ($lk = mysqli_fetch_array($queryListKomisi)) {
+            # code...
+            $totalKomisi += $lk['total_komisi'];
+            $countKomisi++;
+            $kalimatkomisi .= $lk['kode_komisi'] . ", ";
+        }
+        // echo "<p>".$kalimatkomisi."</p>";
+
+        $totalGajiMasuk = $totalMasuk*10000;
+        $totalCountIzinDanTidakValid = $totalIzin + $totalTidakValid;
+        $totalGajiIzin = $totalCountIzinDanTidakValid*10000;
+        $gajiPok = 700000;
+
         ?>
 
         <div class=" container mt-5">
@@ -86,42 +123,35 @@ if ($cek == 0) {
 
                                         <div class="row">
                                             <div class="col-md-6">
-
-                                                <div class="form-group">
-                                                    <label>Total Tunjangan</label>
-                                                    <input type="number" class="form-control" name="tunjangan" value="<?= $row_tunjangan['tunjangan']; ?>" readonly>
-                                                </div>
-                                                <div class="form-group">
+                                            <div class="form-group">
                                                     <label>Gaji Pokok</label>
-                                                    <?php
-                                                    if ($r['status_karyawan'] == "harian") {
-                                                    ?>
-                                                        <input type="number" class="form-control" name="gapok" value="<?= $b['gapok'] = 0; ?>" readonly>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <input type="number" class="form-control" name="gapok" value="<?= $b['gapok']; ?>" readonly>
-                                                    <?php } ?>
+                                                    <input type="number" class="form-control" name="gapok" value="700000" id="gapok">
+                                                    <input type="hidden" class="form-control" name="kode_karyawan" id="kode_karyawan" value="<?= $id ?>">
                                                 </div>
-                                                <?php
-                                                $data = mysqli_query($koneksi, "SELECT * FROM tb_absenkaryawan WHERE (id_karyawan IS NOT NULL OR status_absensi = 'tidak hadir') AND tgl_absensi='$bln'");
-                                                $total_absen = mysqli_num_rows($data);
-
-                                                $tidakhadir = 30 - $total_absen;
-                                                $potongan = $tidakhadir * 50000;
-                                                ?>
                                                 <div class="form-group">
-                                                    <label>Potongan</label>
-                                                    <input type="number" class="form-control" name="potongan" value="<?= $potongan ?>" readonly>
+                                                    <label>Gaji Absen Masuk (<?= $totalMasuk ?> hari x Rp10.000)</label>
+                                                    <input type="hidden" class="form-control" name="total_count_masuk" id="total_count_masuk" value="<?= $totalMasuk ?>">
+                                                    <input type="number" class="form-control" name="gaji_absen_masuk" id="gaji_absen_masuk" value="<?= $totalGajiMasuk ?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Komisi (<?=  $countKomisi ?>)</label>
+                                                    <input type="hidden" class="form-control" name="total_count_komisi" id="total_count_komisi" value="<?= $countKomisi ?>">
+                                                    <input type="hidden" class="form-control" name="keterangan_komisi" id="keterangan_komisi" value="<?= $kalimatkomisi ?>">
+                                                    <input type="number" class="form-control" name="komisi" id="komisi" value="<?= $totalKomisi ?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Absen Izin (<?=  $totalCountIzinDanTidakValid ?> hari)</label>
+                                                    <input type="hidden" class="form-control" name="total_count_izin" id="total_count_izin" value="<?= $totalCountIzinDanTidakValid ?>">
+                                                    <input type="number" class="form-control" name="izin" id="izin" value="<?= $totalGajiIzin ?>" readonly>
+                                                </div>
+                                                <!-- total form -->
+                                                <div class="form-group
+                                                ">
+                                                    <label>Total Gaji</label>
+                                                    <input type="number" class="form-control" name="total_gaji" id="total_gaji" value="<?= ($gajiPok + $totalGajiMasuk + $totalKomisi) - $totalGajiIzin ?>" readonly>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-
-                                                <div class="form-group">
-                                                    <label>Bonus</label>
-                                                    <input type="number" class="form-control" name="bonus">
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -142,13 +172,22 @@ if ($cek == 0) {
 if (isset($_POST['saveGaji'])) {
     $tgl_gaji = $tgl;
     $id = $_POST['id_karyawan'];
-    $potongan = $_POST['potongan'];
+    $potongan = 0;
     $gapok = $_POST['gapok'];
-    $tunjangan = $_POST['tunjangan'];
-    $bonus = $_POST['bonus'];
+    $kode_karyawan = $_POST['kode_karyawan'];
+    $tunjangan = 0;
+    $bonus = 0;
+    // gaji_absen_masuk, komisi, detail_komisi, absen_izin_count, total_absen_izin, total_gaji, absen_masuk_count
+    $gaji_absen_masuk = $_POST['gaji_absen_masuk'];
+    $komisi = $_POST['komisi'];
+    $absen_izin_count = $_POST['total_count_izin'];
+    $total_absen_izin = $_POST['izin'];
+    $total_gaji = $_POST['total_gaji'];
+    $absen_masuk_count = $_POST['total_count_masuk'];
+    $keterangan_komisi = $_POST['keterangan_komisi'];
 
     //query INSERT disini
-    $save = mysqli_query($koneksi, "INSERT INTO tb_gaji VALUES(NULL,'$tgl_gaji','$id','$potongan','$gapok','$tunjangan','$bonus')");
+    $save = mysqli_query($koneksi, "INSERT INTO tb_gaji VALUES(NULL,'$tgl_gaji','$id','$potongan','$gapok','$tunjangan','$bonus', '$gaji_absen_masuk', '$komisi', '$keterangan_komisi', '$absen_izin_count', '$total_absen_izin', '$total_gaji', '$absen_masuk_count')");
 
     if ($save) {
         echo " <script>
@@ -159,3 +198,15 @@ if (isset($_POST['saveGaji'])) {
 }
 
 ?>
+
+<!-- buatkan script yang akan merubah total_gaji ketika form gapok diketik -->
+<script>
+    document.getElementById('gapok').addEventListener('keyup', function() {
+        var gapok = this.value;
+        var gaji_absen_masuk = document.getElementById('gaji_absen_masuk').value;
+        var komisi = document.getElementById('komisi').value;
+        var izin = document.getElementById('izin').value;
+        var total_gaji = parseInt(gapok) + parseInt(gaji_absen_masuk) + parseInt(komisi) - parseInt(izin);
+        document.getElementById('total_gaji').value = total_gaji;
+    });
+</script>

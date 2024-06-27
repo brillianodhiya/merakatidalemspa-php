@@ -140,7 +140,7 @@ if (@$_SESSION['Admin']) {
       <!-- <h6 class="collapse-header">Login Screens:</h6> -->
       <a class="collapse-item" href="?page=laporan&act=pendapatan">Pendapatan Bulanan</a>
       <a class="collapse-item" href="pengeluaranbulanan.php">Pengeluaran Bulanan</a>
-      <a class="collapse-item" href="gaji.php">Gaji Kryawan</a>
+      <a class="collapse-item" href="?page=gaji&act=">Gaji Kryawan</a>
     </div>
   </div>
 </li>
