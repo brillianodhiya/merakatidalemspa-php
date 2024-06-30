@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 28/06/2024 00:33:53
+ Date: 28/06/2024 16:37:02
 */
 
 SET NAMES utf8mb4;
@@ -224,6 +224,7 @@ CREATE TABLE `tb_gaji`  (
 -- Records of tb_gaji
 -- ----------------------------
 INSERT INTO `tb_gaji` VALUES (142, '2024-06-28', 1, 0, 700000, 0, 0, 30000, 126400, 'Facial Treatment, Facial Treatment, Treatment Satuan, Spa Treatment, ', 2, 20000, 836400, 3);
+INSERT INTO `tb_gaji` VALUES (143, '2024-06-28', 1, 0, 700000, 0, 0, 30000, 126400, 'Facial Treatment, Facial Treatment, Treatment Satuan, Spa Treatment, ', 2, 20000, 836400, 3);
 
 -- ----------------------------
 -- Table structure for tb_karyawan

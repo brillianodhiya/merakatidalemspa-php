@@ -25,8 +25,27 @@ session_start();
 </head>
 <style>
     body {
-        background-image: url('assets/assets1/img/bg/herringbone.png');
+        background-image: url('assets/img/bg/bg 1.jpg');
+        background-size: 100% 100vh; /* cover the entire viewport */
+        background-position: center; 
+       background-repeat: no-repeat;
+    
     }
+    /* For smaller screens */
+@media (max-width: 768px) {
+    body {
+        background-size: 100% 75vh;
+         /* reduce the height of the image */
+        background-position: center bottom;
+    }
+}
+
+/* For larger screens */
+@media (min-width: 1200px) {
+    body {
+        background-size: 100% 100vh; /* increase the height of the image */
+    }
+}
 </style>
 
 <body>
@@ -61,8 +80,7 @@ session_start();
                                             </select>
                                         </div>
                                         <hr>
-                                        <button type="submit" value="LOGIN" name="Login" class="btn btn-primary btn-lg btn-block rounded-pill">Login</button>
-                                        <a href="pelamar/home.php" class="btn btn-success btn-lg btn-block rounded-pill">Rekrutmen</a>
+                                        <button type="submit" value="LOGIN" name="Login" class="btn btn-lg btn-block rounded-pill" style="background-color:#800080; color:#ffff;">Login</button>
                                     </form>
                                 </div>
                             </div>

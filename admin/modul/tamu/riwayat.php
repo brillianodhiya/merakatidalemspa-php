@@ -3,12 +3,12 @@
     <div class="card shadow mb-4">
         <h5 class="card-header text-center">Data Pelanggan</h5>
         <div class="card-body">
-            <a href="?page=tamu&act=add" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah Pelanggan</a></button>
+            <a href="?page=tamu&act=add" class="btn mb-3" style="background-color: #800080; color: #ffff;"><i class="fa fa-plus" style="color: #ffff;"></i> Tambah Pelanggan</a></button>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                        <th width="40px"> Id</th>
+                        <th> No</th>
                         <th>Nama Klien</th>
                         <th>Alamat</th>
                         <th>Nomor Telfon</th>
@@ -42,7 +42,7 @@
                                 <td><?= rupiah($d['total']); ?></td>
                                 <td><?= $d['tanggal_kunjung']; ?></td>
                                 <td>
-                                    <a href="?page=tamu&act=edit&id_tamu=<?= $d['id_tamu']; ?>" class="btn btn-warning text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a>
+                                    <a href="?page=tamu&act=edit&id_tamu=<?= $d['id_tamu']; ?>" class="btn btn-primary text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a>
 
                                     <a href="?page=tamu&act=del&id_tamu=<?= $d['id_tamu']; ?>" class="btn btn-danger text-white text-right"> <i class="fas fa-trash-alt fa-1x text-white"></i> </a>
                                 </td>

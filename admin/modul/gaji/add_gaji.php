@@ -10,7 +10,7 @@
                         <div class="input-group col-md-6">
                             <input type="text" class="typeahead form-control" placeholder="Masukkan Kode Karyawan" required name="kode_karyawan" autofocus=”autofocus” autocomplete="off">
                             <span class="input-group-btn ml-3">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Cari</button>
+                                <button type="submit" class="btn" style="background-color: #800080; color:#ffff;"><i class="fa fa-search text-white"></i> Cari</button>
                             </span>
                         </div>
                     </div>

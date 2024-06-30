@@ -13,7 +13,7 @@ if (@$_SESSION['Admin']) {
 
     <div class="card mt-3">
         <div class="card-body text-center">
-            <h2>Selamat Datang <strong><?= $data['nama_admin'] ?></strong></h2>
+            <h2>Selamat Datang <strong style="color:#a390a7;"><?= $data['nama_admin'] ?></strong></h2>
             <h2>Pada Halaman Administrator <strong><?= $oke1['nama_sekolah'] ?></strong> </h2>
         </div>
     </div>

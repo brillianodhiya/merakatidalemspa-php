@@ -1,6 +1,7 @@
 <?php
 $tgl = date('Y-m-d');
 $bulan = date('m');
+$tahun = date('Y');
 ?>
 <?php
 $idk = $_POST['id'];
@@ -31,38 +32,53 @@ if ($cek == 0) {
                                 <th>:</th>
                                 <th><?= $r['kode_karyawan'] ?></th>
                             </tr>
-                            <tr>
-                                <th>Bulan</th>
+                            <!-- <tr>
+                                <th>Pilih Bulan (<?= $tahun ?>)</th>
                                 <th>:</th>
-                                <th><?php
-                                $bln = date('m');
-                                if ($bln == 1) {
-                                    echo "Januari";
-                                } elseif ($bln == 2) {
-                                    echo "Februari";
-                                } elseif ($bln == 3) {
-                                    echo "Maret";
-                                } elseif ($bln == 4) {
-                                    echo "April";
-                                } elseif ($bln == 5) {
-                                    echo "Mei";
-                                } elseif ($bln == 6) {
-                                    echo "Juni";
-                                } elseif ($bln == 7) {
-                                    echo "Juli";
-                                } elseif ($bln == 8) {
-                                    echo "Agustus";
-                                } elseif ($bln == 9) {
-                                    echo "September";
-                                } elseif ($bln == 10) {
-                                    echo "Oktober";
-                                } elseif ($bln == 11) {
-                                    echo "November";
-                                } elseif ($bln == 12) {
-                                    echo "Desember";
-                                }
-                                 ?></th>
-                            </tr>
+                          
+                                    <th>
+                                        <select name="bulan" id="bulan" class="form-control">
+                                            <option value="1" <?php if ($bulan == 1) {
+                                                                    echo "selected";
+                                                                } ?>>Januari</option>
+                                            <option value="2" <?php if ($bulan == 2) {
+                                                                    echo "selected";
+                                                                } ?>>Februari</option>
+                                            <option value="3" <?php if ($bulan == 3) {
+                                                                    echo "selected";
+                                                                } ?>>Maret</option>
+                                            <option value="4" <?php if ($bulan == 4) {
+                                                                    echo "selected";
+                                                                } ?>>April</option>
+                                            <option value="5" <?php if ($bulan == 5) {
+                                                                    echo "selected";
+                                                                } ?>>Mei</option>
+                                            <option value="6" <?php if ($bulan == 6) {
+                                                                    echo "selected";
+                                                                } ?>>Juni</option>
+                                            <option value="7" <?php if ($bulan == 7) {
+                                                                    echo "selected";
+                                                                } ?>>Juli</option>
+                                            <option value="8" <?php if ($bulan == 8) {
+                                                                    echo "selected";
+                                                                } ?>>Agustus</option>
+                                            <option value="9" <?php if ($bulan == 9) {
+                                                                    echo "selected";
+                                                                } ?>>September</option>
+                                            <option value="10" <?php if ($bulan == 10) {
+                                                                    echo "selected";
+                                                                } ?>>Oktober</option>
+                                            <option value="11" <?php if ($bulan == 11) {
+                                                                    echo "selected";
+                                                                } ?>>November</option>
+                                            <option value="12" <?php if ($bulan == 12) {
+                                                                    echo "selected";
+                                                                } ?>>Desember</option>
+                                        </select>
+                                    </th>
+                                                                  
+
+                            </tr> -->
                         </table>
                     </span>
                 </div>
@@ -81,7 +97,9 @@ if ($cek == 0) {
         while ($abs = mysqli_fetch_array($absensiQuery)) {
             # code...
             if ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] == 'hadir') {
-                $totalMasuk++;
+                if ($totalMasuk <= 25) {
+                    $totalMasuk++;
+                }
             } elseif ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] != 'hadir') {
                 $totalIzin++;
             } elseif ($abs['valid_absensi'] == "N") {
@@ -124,6 +142,49 @@ if ($cek == 0) {
                                         <div class="row">
                                             <div class="col-md-6">
                                             <div class="form-group">
+                                                    <label>Pilih Bulan</label>
+                                                    <!-- buatkan pilihan dropdown untuk bulan dan dropdown untuk pilihan tahun -->
+                                                    <select name="bulan" id="bulan" class="form-control">
+                                                        <option value="01" <?php if ($bulan == 1) {
+                                                                            echo "selected";
+                                                                        } ?>>Januari</option>
+                                                        <option value="02" <?php if ($bulan == 2) {
+                                                                            echo "selected";
+                                                                        } ?>>Februari</option>
+                                                        <option value="03" <?php if ($bulan == 3) {
+                                                                            echo "selected";
+                                                                        } ?>>Maret</option>
+                                                        <option value="04" <?php if ($bulan == 4) {
+                                                                            echo "selected";
+                                                                        } ?>>April</option>
+                                                        <option value="05" <?php if ($bulan == 5) {
+                                                                            echo "selected";
+                                                                        } ?>>Mei</option>
+                                                        <option value="06" <?php if ($bulan == 6) {
+                                                                            echo "selected";
+                                                                        } ?>>Juni</option>
+                                                        <option value="07" <?php if ($bulan == 7) {
+                                                                            echo "selected";
+                                                                        } ?>>Juli</option>
+                                                        <option value="08" <?php if ($bulan == 8) {
+                                                                            echo "selected";
+                                                                        } ?>>Agustus</option>
+                                                        <option value="09" <?php if ($bulan == 9) {
+                                                                            echo "selected";
+                                                                        } ?>>September</option>
+                                                        <option value="10" <?php if ($bulan == 10) {
+                                                                            echo "selected";
+                                                                        } ?>>Oktober</option>
+                                                        <option value="11" <?php if ($bulan == 11) {
+                                                                            echo "selected";
+                                                                        } ?>>November</option>
+                                                        <option value="12" <?php if ($bulan == 12) {
+                                                                            echo "selected";
+                                                                        } ?>>Desember</option>
+                                                    </select>
+                                                    
+                                                </div>
+                                            <div class="form-group">
                                                     <label>Gaji Pokok</label>
                                                     <input type="number" class="form-control" name="gapok" value="700000" id="gapok">
                                                     <input type="hidden" class="form-control" name="kode_karyawan" id="kode_karyawan" value="<?= $id ?>">
@@ -151,7 +212,44 @@ if ($cek == 0) {
                                                     <input type="number" class="form-control" name="total_gaji" id="total_gaji" value="<?= ($gajiPok + $totalGajiMasuk + $totalKomisi) - $totalGajiIzin ?>" readonly>
                                                 </div>
                                             </div>
-                                           
+                                            <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label>Pilih Tahun</label>
+                                                    <!-- buatkan pilihan dropdown untuk bulan dan dropdown untuk pilihan tahun -->
+                                                    <select name="tahun" id="tahun" class="form-control">
+                                                        <option value="2021" <?php if ($tahun == 2021) {
+                                                                                echo "selected";
+                                                                            } ?>>2021</option>
+                                                        <option value="2022" <?php if ($tahun == 2022) {
+                                                                                echo "selected";
+                                                                            } ?>>2022</option>
+                                                        <option value="2023" <?php if ($tahun == 2023) {
+                                                                                echo "selected";
+                                                                            } ?>>2023</option>
+                                                        <option value="2024" <?php if ($tahun == 2024) {
+                                                                                echo "selected";
+                                                                            } ?>>2024</option>
+                                                        <option value="2025" <?php if ($tahun == 2025) {
+                                                                                echo "selected";
+                                                                            } ?>>2025</option>
+                                                        <option value="2026" <?php if ($tahun == 2026) {
+                                                                                echo "selected";
+                                                                            } ?>>2026</option>
+                                                        <option value="2027" <?php if ($tahun == 2027) {
+                                                                                echo "selected";
+                                                                            } ?>>2027</option>
+                                                        <option value="2028" <?php if ($tahun == 2028) {
+                                                                                echo "selected";
+                                                                            } ?>>2028</option>
+                                                        <option value="2029" <?php if ($tahun == 2029) {
+                                                                                echo "selected";
+                                                                            } ?>>2029</option>
+                                                        <option value="2030" <?php if ($tahun == 2030) {
+                                                                                echo "selected";
+                                                                            } ?>>2030</option>
+                                                    </select>
+                                                </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +257,7 @@ if ($cek == 0) {
                         </div>
                     </div>
                     <br>
-                    <input type="submit" name="saveGaji" class="btn btn-primary btn-lg" />
+                    <input type="submit" name="saveGaji" class="btn btn-lg" style="background-color:#800080; color:#ffff;" />
                 </div>
             </div>
         </div>
@@ -199,7 +297,6 @@ if (isset($_POST['saveGaji'])) {
 
 ?>
 
-<!-- buatkan script yang akan merubah total_gaji ketika form gapok diketik -->
 <script>
     document.getElementById('gapok').addEventListener('keyup', function() {
         var gapok = this.value;
@@ -209,4 +306,52 @@ if (isset($_POST['saveGaji'])) {
         var total_gaji = parseInt(gapok) + parseInt(gaji_absen_masuk) + parseInt(komisi) - parseInt(izin);
         document.getElementById('total_gaji').value = total_gaji;
     });
+
+    // ketika bulan ataupun tahun berubah panggil fungsi fetchGajiData
+    document.getElementById('bulan').addEventListener('change', function() {
+        var bulan = this.value;
+        var tahun = document.getElementById('tahun').value;
+        fetchGajiData(tahun + "-" + bulan);
+    });
+    document.getElementById('tahun').addEventListener('change', function() {
+        var tahun = this.value;
+        var bulan = document.getElementById('bulan').value;
+        fetchGajiData(tahun + "-" + bulan);
+    });
+
+    function fetchGajiData(bulan) {
+    // Menggunakan teknologi Ajax (misalnya dengan jQuery atau fetch API)
+    // Kirim permintaan ke server dengan parameter tanggal
+    // Tangani respons dari server dan isi dropdown nama tamu
+    // console.log(bulan);
+    var id_karyawan =  <?php
+    echo $idKaryawan;
+    ?>;
+    // gunakan fetch GET
+    var url = ""
+    if (window.location.origin.includes("localhost")) {
+        url = '/adminsalon/config/fetch_gaji.php?bulan=' + bulan
+    } else {
+        url = '/config/fetch_gaji.php?bulan=' + bulan
+    }
+    fetch(url + "&id_karyawan=" + id_karyawan)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // isi dropdown nama tamu
+            // output {"totalMasuk":3,"totalIzin":1,"totalTidakValid":1,"bulan":"2024-06-25","idKaryawan":"1","totalGajiMasuk":30000,"totalCountIzinDanTidakValid":2,"totalGajiIzin":20000,"gajiPok":700000,"totalKomisi":126400,"countKomisi":4,"kalimatkomisi":"Facial Treatment, Facial Treatment, Treatment Satuan, Spa Treatment, ","totalGaji":836400}
+            if (data) {
+                document.getElementById('total_count_masuk').value = data.totalMasuk;
+                document.getElementById('gaji_absen_masuk').value = data.totalGajiMasuk;
+                document.getElementById('total_count_izin').value = data.totalCountIzinDanTidakValid;
+                document.getElementById('izin').value = data.totalGajiIzin;
+                document.getElementById('komisi').value = data.totalKomisi;
+                document.getElementById('total_count_komisi').value = data.countKomisi;
+                document.getElementById('keterangan_komisi').value = data.kalimatkomisi;
+                document.getElementById('total_gaji').value = data.totalGaji;
+            }
+        });
+
+}
+
 </script>

@@ -22,11 +22,11 @@ while ($d = mysqli_fetch_array($data)) {
         $data = mysqli_query($koneksi, "SELECT * FROM tb_aplikasi");
         while ($d = mysqli_fetch_array($data)) {
         ?>
-            <img src="../../../assets/img/app/<?= $d['foto'] ?>" class="img-thumbnail" style="height: 100px;width: 100px;">
+            <img src="../../../assets/img/app/logo.png" class="img-thumbnail" style="height: 100px;width: 100px;">
         <?php } ?>
         <br>
         <h3><b>Laporan Penggajian Karyawan</b></h3>
-        <p><b><?= $d['nama_instansi']; ?></p></b>
+        <p><b>Merak Ati Dalem Spa</p></b>
         <hr style="font-weight:bold; font-size: 12px;">
     </center>
 

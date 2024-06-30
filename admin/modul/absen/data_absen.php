@@ -14,8 +14,8 @@
                             <th>Status Validasi</th>
                         </tr>
                     </thead>
-            </div>
 
+            <tbody>
             <?php
             $no = 1;
             // $data = mysqli_query($koneksi,"SELECT * FROM tb_karyawan");
@@ -23,7 +23,6 @@
                     INNER JOIN tb_karyawan ON tb_absenkaryawan.id_karyawan = tb_karyawan.id_karyawan");
             while ($d = mysqli_fetch_array($data)) {
             ?>
-                <tbody>
                     <tr>
                     <?php
 echo '<td>'. date('l, j F Y', strtotime($d['tgl_absensi'])). '</td>';
@@ -94,6 +93,8 @@ echo '<td>'. date('l, j F Y', strtotime($d['tgl_absensi'])). '</td>';
                 ?>
                 </tbody>
                 </table>
+            </div>
+                
         </div>
     </div>
 </div>

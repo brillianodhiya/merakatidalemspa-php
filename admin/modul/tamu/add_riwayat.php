@@ -10,7 +10,7 @@ $level = "admin";
 
     <div class="card shadow mb-4">
         <div class="card-header py-2">
-            <h6 class="m-0 font-weight-bold text-primary">Tambah Data Pelanggan</h6>
+            <h6 class="m-0 font-weight-bold" style="color: #800080;">Tambah Data Pelanggan</h6>
         </div>
         <div class="card-body">
         
@@ -71,7 +71,7 @@ $level = "admin";
                     </div>
                     
                     
-                    <button name="saveTamu" type="submit" class="btn btn-success mr-2">Simpan</button>
+                    <button name="saveTamu" type="submit" class="btn mr-2" style="background-color: #800080; color: #ffff;">Simpan</button>
                </form>
             </div>
         </div>

@@ -4,7 +4,7 @@
             <h3>Laporan Pendapatan</h3>
         </div>
         <div class="card-body">
-            <form action="modul/laporan/cetak_pendapatan.php?gaji=<?= $_GET['pendapatan']; ?>" method="post" enctype="multipart/form-data" target="_blank">
+            <form action="modul/laporan/cetak_pendapatan.php" method="post" enctype="multipart/form-data" target="_blank">
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tanggal Awal</label>

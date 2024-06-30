@@ -22,14 +22,13 @@ while ($d = mysqli_fetch_array($data)) {
                                         <th width="50%">Nama Karyawan</th>
                                     </tr>
                                 </thead>
-                        </div>
 
+                        <tbody>
                         <?php
                         $no = 1;
                         $data = mysqli_query($koneksi, "SELECT * FROM tb_karyawan WHERE id_tunjangan='$id'");
                         while ($d = mysqli_fetch_array($data)) {
                         ?>
-                            <tbody>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
                                     <td><?php echo $d['kode_karyawan']; ?></td>
@@ -39,16 +38,13 @@ while ($d = mysqli_fetch_array($data)) {
                         }
                     }
                         ?>
-                        </tr>
-                    </div>
                     </tbody>
                     </table>
                 </div>
             </div>
         </div>
         </div>
+        </div>
 
 
     </body>
-
-    </html>

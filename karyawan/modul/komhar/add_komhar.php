@@ -2,7 +2,7 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-2">
-            <h6 class="m-0 font-weight-bold text-primary">Komisi Harian </h6>
+            <h6 class="m-0 font-weight-bold " style="color: #800080;">Komisi Harian </h6>
         </div>
         <div class="card-body">
             <p style="color: red">Silahkan isi absen setiap hari kerja</p>
@@ -66,7 +66,7 @@
                         id="harga"
                         >
                     </div>
-                    <button name="saveMasuk" type="submit" class="btn btn-primary mr-2">Masukkan Komisi</button>
+                    <button name="saveMasuk" type="submit" class="btn mr-2" style="background-color: #800080; color: #ffff;">Masukkan Komisi</button>
                 </form>
             </div>
         </div>

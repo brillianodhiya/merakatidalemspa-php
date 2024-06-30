@@ -30,25 +30,37 @@ if (@$_SESSION['Karyawan']) {
         <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <style type="text/css">
+   .sembunyikan{
+  display: none;
+  
+}
+.cobasidebar{
+    background-color: #800080; 
+}
+    .tulisancoba{
+        color:#ffff;
+    }
+    .tulisancoba:hover{
+        color: #4d2e57;
+    }
+    
+ </style>
     </head>
 
     <body id="page-top">
         <!-- Page Wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav  sidebar  accordion cobasidebar" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+                <a class="tulisancoba sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                     <?= $data['nama_karyawan']; ?>
                 </a>
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Beranda</span></a>
-                </li>
+                
 
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -56,19 +68,19 @@ if (@$_SESSION['Karyawan']) {
 
                 <li class="nav-item">
                     <a class="nav-link" href="?page=absen">
-                        <i class="fas fa-address-book"></i>
-                        <span>Data Absensi</span></a>
+                        <i class="fas fa-address-book tulisancoba"></i>
+                        <span class="tulisancoba">Data Absensi</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="?page=gaji">
-                        <i class="fas fa-money-check"></i>
-                        <span>Data Penggajian</span></a>
+                        <i class="fas fa-money-check tulisancoba"></i>
+                        <span class="tulisancoba">Data Penggajian</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?page=komhar">
-                        <i class="fas fa-money-check"></i>
-                        <span>Komisi Harian</span></a>
+                        <i class="fas fa-money-check tulisancoba"></i>
+                        <span class="tulisancoba">Komisi Harian</span></a>
                 </li>
 
 
@@ -96,7 +108,7 @@ if (@$_SESSION['Karyawan']) {
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
                             <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
+                                <i class="fa fa-bars" style="color:#800080;"></i>
                             </button>
                         </form>
 
@@ -108,21 +120,21 @@ if (@$_SESSION['Karyawan']) {
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <span class="mr-2 d-none d-lg-inline small" style="color:#a390a7;">
                                         <?= $data['nama_karyawan']; ?>
                                     </span>
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2" style="color:#800080;"></i>
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="?page=profil">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 " style="color:#a390a7;"></i>
                                         Profile
                                     </a>
 
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 " style="color:#a390a7;"></i>
                                         Logout
                                     </a>
                                 </div>
@@ -175,8 +187,10 @@ if (@$_SESSION['Karyawan']) {
                             }
                         } elseif ($page == 'profil') {
                             if ($act == '') {
-                                include 'modul/profil/data_profil.php';
-                            }
+                                include 'modul/profil/data_admin.php';
+                            } elseif ($act == 'edit') {
+                                include 'modul/profil/edit_admin.php';
+                            } 
                         } elseif ($page == '') {
                             include 'home.php';
                         } else {
@@ -191,7 +205,7 @@ if (@$_SESSION['Karyawan']) {
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
+                            <span>Copyright &copy; Merak Ati 2024</span>
                         </div>
                     </div>
                 </footer>

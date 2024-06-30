@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <div class="text-center h3 m-0 font-weight-bold text-primary">Form Tambah Data Komisi</div>
+            <div class="text-center h3 m-0 font-weight-bold" style="color:#800080;">Form Tambah Data Komisi</div>
         </div>
         <div class="card-body">
             <form action="" method="POST" enctype="multipart/form-data">
@@ -14,9 +14,8 @@
                     <input type="text" class="form-control" placeholder="Masukkan Jumlah Komisi" name="jumlah" required="required">
                 </div>
 
-                <button name="saveBagian" type="submit" class="btn btn-success mr-2">Simpan</button>
-                <button class="btn btn-success mr-2" a href="index.php">Kembali</button></a>
-            </form>
+                <button name="saveBagian" type="submit" class="btn mr-2" style="background-color:#800080; color:#ffff;">Simpan</button>
+                </form>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
         <div class="card shadow mb-4">
             <h5 class="card-header text-center">Data Gaji Karyawan</h5>
             <div class="card-body">
-                <a href="?page=gaji&act=add" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah Gaji</a></button>
+                <a href="?page=gaji&act=add" class="btn mb-3" style="background-color: #800080; color:#ffff;"><i class="fa fa-plus" style="color:#ffff;"></i> Tambah Gaji</a></button>
                 <div class="table-responsive">
                     <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -16,12 +16,12 @@
                                 <th>Opsi</th>
                             </tr>
                         </thead>
+                        <tbody>
                         <?php
                         $no = 1;
                         $data = mysqli_query($koneksi, "SELECT * FROM tb_gaji INNER JOIN tb_karyawan ON tb_gaji.id_karyawan = tb_karyawan.id_karyawan");
                         while ($d = mysqli_fetch_array($data)) {
                         ?>
-                            <tbody>
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $d['tgl_gaji']; ?></td>
@@ -36,7 +36,7 @@
                                     <td>
                                         <!-- <a href="?page=gaji&act=edit&id_gaji=<?= $d['id_gaji']; ?>" class="btn btn-warning text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a> -->
                                         <a href="?page=gaji&act=del&id_gaji=<?= $d['id_gaji']; ?>" class="btn btn-danger text-white text-right"> <i class="fas fa-trash-alt fa-1x text-white"></i></a>
-                                        <a href="modul/laporan/cetak_perkaryawan.php?gaji=<?= $_GET['gaji']; ?>&id=<?= $d['id_gaji'] ?>" target="_blank" class="btn btn-success text-white text-right"><i class="fa fa-print text-white"></i> </a>
+                                        <a href="modul/laporan/cetak_perkaryawan.php?gaji=<?= $_GET['gaji']; ?>&id=<?= $d['id_gaji'] ?>" target="_blank" class="btn text-white text-right" style="background-color: #800080; color:#ffff;"><i class="fa fa-print text-white"></i> </a>
                                     </td>
                                 <?php
                             }
@@ -44,7 +44,8 @@
                                 </tr>
                             </tbody>
                     </table>
-                    </tr>
                 </div>
             </div>
         </div>
+    </div>
+</body>

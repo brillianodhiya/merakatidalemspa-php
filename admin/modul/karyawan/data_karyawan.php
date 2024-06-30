@@ -2,7 +2,7 @@
     <div class="card shadow mb-4">
         <h5 class="card-header text-center">Data Karyawan</h5>
         <div class="card-body">
-            <a href="?page=karyawan&act=add" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah Karyawan</a></button>
+            <a href="?page=karyawan&act=add" class="btn mb-3" style="background-color: #800080; color: #ffff;"><i class="fa fa-plus" style="color: #ffff;"></i> Tambah Karyawan</a></button>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -11,7 +11,7 @@
                             <th>Kode Karyawan</th>
                             <th>Nama Karyawan</th>
                             <th>Nomor Telfon</th>
-                            <th>Tanggal Input</th>
+                            <th>Tanggal Masuk Kerja</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                                 <td><?= $d['tgl_masuk']; ?></td>
                                 <td>
                                     
-                                    <a href="?page=karyawan&act=edit&id_karyawan=<?= $d['id_karyawan']; ?>" class="btn btn-warning text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a>
+                                    <a href="?page=karyawan&act=edit&id_karyawan=<?= $d['id_karyawan']; ?>" class="btn btn-primary text-white text-right"> <i class="fa fa-user-edit text-white"></i> </a>
 
                                     <a href="?page=karyawan&act=del&id_karyawan=<?= $d['id_karyawan']; ?>" class="btn btn-danger text-white text-right"> <i class="fas fa-trash-alt fa-1x text-white"></i> </a>
                                 </td>

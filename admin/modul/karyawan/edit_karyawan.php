@@ -7,7 +7,7 @@ while ($d = mysqli_fetch_array($data)) {
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Edit Data Karyawan</h6>
+                <h6 class="m-0 font-weight-bold" style="color: #800080;">Edit Data Karyawan</h6>
             </div>
             <div class="card-header py-2">
                 <div class="card-body">
@@ -22,8 +22,8 @@ while ($d = mysqli_fetch_array($data)) {
                             <label>Nomor Telfon :</label>
                             <input type="text" class="form-control" name="no_hp" value="<?php echo $d['no_hp']; ?>">
                         </div>
-                        <button name="updateKaryawan" type="submit" class="btn btn-success mr-2">Simpan</button>
-                        <button class="btn btn-success mr-2" a href="index.php">Kembali</button></a>
+                        <button name="updateKaryawan" type="submit" class="btn mr-2" style="background-color: #800080; color:#ffff;">Simpan</button>
+
                     </form>
                 </div>
             </div>

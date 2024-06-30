@@ -18,8 +18,8 @@ while ($d = mysqli_fetch_array($data)) {
                         <label>Jumlah Komisi</label>
                         <input type="text" class="form-control" name="jumlah" value="<?php echo $d['jumlah']; ?>">
                     </div>
-                    <button name="updateTunjangan" type="submit" class="btn btn-success mr-2">Simpan</button>
-                    <button class="btn btn-success mr-2" a href="index.php">Kembali</button></a>
+                    <button name="updateTunjangan" type="submit" class="btn mr-2" style="background-color: #800080; color:#ffff;">Simpan</button>
+
                 </form>
             </div>
         </div>

@@ -7,7 +7,7 @@ $jam = date("h:i:sa");
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-2">
-            <h6 class="m-0 font-weight-bold text-primary">Silahkan Masukkan Keterangan Anda</h6>
+            <h6 class="m-0 font-weight-bold" style="color:#800080;">Silahkan Masukkan Keterangan Anda</h6>
         </div>
         <div class="card-body">
             <div class="container">
@@ -38,7 +38,7 @@ $jam = date("h:i:sa");
                         <input type="file" name="foto" required="required">
                         <p style="color: red">Silahkan masukkan bukti izin/sakit dengan ekstensi .png | .jpg | .jpeg</p>
                     </div>
-                    <button name="saveIzin" type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button name="saveIzin" type="submit" class="btn mr-2" style="background-color:#800080; color:#ffff;">Submit</button>
                 </form>
             </div>
         </div>

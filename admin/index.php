@@ -40,11 +40,25 @@ if (@$_SESSION['Admin']) {
         <style type="text/css">
    .sembunyikan{
   display: none;
+  
 }
+.cobasidebar{
+    background-color: #800080;
+  
+}
+
+    .tulisancoba{
+        color:#ffff;
+    }
+    .tulisancoba:hover{
+        color: #4d2e57;
+    }
+
+    
  </style>
 
   <script src="js/Chart.bundle.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="asset/js/jquery-1.10.2.js"></script>
   <script src="asset/js/jquery-ui.js"></script>
@@ -72,11 +86,11 @@ if (@$_SESSION['Admin']) {
 
     <body id="page-top">
         <!-- Page Wrapper -->
-        <div id="wrapper">
+        <div id="wrapper" >
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav  sidebar  accordion cobasidebar" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+                <a class="tulisancoba sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                     Merak Ati
                     <br>
                     Dalem Spa
@@ -89,18 +103,25 @@ if (@$_SESSION['Admin']) {
   Interface
 </div>
 
+<!-- Nav Item - Dashboardn -->
+<li class="nav-item ">
+  <a class="nav-link" href="?page=dashboard">
+    <i class="fas fa-fw fa-chart-pie tulisancoba"></i>
+    <span class="tulisancoba">Dashboard</span></a>
+</li>
+
 <!-- Nav Item - riwayat pelanggan -->
-<li class="nav-item">
+<li class="nav-item ">
   <a class="nav-link" href="?page=tamu">
-    <i class="fas fa-fw fa-chart-area"></i>
-    <span>Riwayat Pelanggan</span></a>
+    <i class="fas fa-fw fa-chart-area tulisancoba"></i>
+    <span class="tulisancoba">Riwayat Pelanggan</span></a>
 </li>
 
 <!-- Nav Item - karyawan -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>Karyawan</span>
+  <a class="nav-link collapsed tulisancoba" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-fw fa-cog "></i>
+    <span class="tulisancoba">Karyawan</span>
   </a>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
@@ -114,7 +135,7 @@ if (@$_SESSION['Admin']) {
 
 <!-- Nav Item - Administrasi -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+  <a class="nav-link collapsed tulisancoba" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
     <i class="fas fa-fw fa-wrench"></i>
     <span>Administrasi</span>
   </a>
@@ -122,7 +143,7 @@ if (@$_SESSION['Admin']) {
     <div class="bg-white py-2 collapse-inner rounded">
       <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
       <a class="collapse-item" href="?page=pendapatan">Pendapatan</a>
-      <a class="collapse-item" href="pengeluaran.php">Pengeluaran</a>
+      <a class="collapse-item" href="?page=pengeluaran">Pengeluaran</a>
       <a class="collapse-item" href="?page=komisi">Komisi</a>
       
     </div>
@@ -131,57 +152,21 @@ if (@$_SESSION['Admin']) {
 
 <!-- Nav Item - Pelaporan -->
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+  <a class="nav-link collapsed tulisancoba" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
     <i class="fas fa-fw fa-folder"></i>
     <span>Pelaporan</span>
   </a>
   <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
       <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-      <a class="collapse-item" href="?page=laporan&act=pendapatan">Pendapatan Bulanan</a>
-      <a class="collapse-item" href="pengeluaranbulanan.php">Pengeluaran Bulanan</a>
+      <a class="collapse-item" href="?page=laporan">Pendapatan Bulanan</a>
+      <a class="collapse-item" href="?page=laporan&act=pengeluaran">Pengeluaran Bulanan</a>
       <a class="collapse-item" href="?page=gaji&act=">Gaji Kryawan</a>
     </div>
   </div>
 </li>
 
 
-<!-- Divider -->
-<hr class="sidebar-divider">
-
-<!-- Heading -->
-<div class="sidebar-heading">
-  Addons
-</div>
-
-<!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-    <i class="fas fa-fw fa-folder"></i>
-    <span>Pages</span>
-  </a>
-  <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Login Screens:</h6>
-      <a class="collapse-item" href="login.php">Login</a>
-      <a class="collapse-item" href="register.php">Register</a>
-      <!-- <a class="collapse-item" href="forgot-password.html">Forgot Password</a> -->
-      <div class="collapse-divider"></div>
-      <!-- <h6 class="collapse-header">Other Pages:</h6> -->
-      <!-- <a class="collapse-item" href="404.html">404 Page</a>
-      <a class="collapse-item" href="blank.html">Blank Page</a> -->
-    </div>
-  </div>
-</li>
-
-
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-  <a class="nav-link" href="tables.html">
-    <i class="fas fa-fw fa-table"></i>
-    <span>Tables</span></a>
-</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
@@ -205,8 +190,8 @@ if (@$_SESSION['Admin']) {
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
+                            <button id="sidebarToggleTop" class="btn  d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars" style="color:#800080;"></i>
                             </button>
                         </form>
 
@@ -221,32 +206,33 @@ if (@$_SESSION['Admin']) {
                                 
                                 <!-- Counter - Messages -->
                                 
-                                <h5 style="color : black;   font-weight: 700; font-size: 14px" id="jam">00:00:00</h5>
+                                <h5 style="color : black; font-weight: 700; font-size: 14px" id="jam">00:00:00</h5>
                             </a>
                             </li>
 
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <span class="mr-2 d-none d-lg-inline small" style="color:#a390a7;">
                                         <?= $data['nama_admin']; ?>
                                     </span>
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2" style="color: #800080; "></i>
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="?page=profil">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-user fa-sm fa-fw mr-2" style="color:#a390a7;"></i>
                                         Profile
                                     </a>
 
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 " style="color:#a390a7;"></i>
                                         Logout
                                     </a>
                                 </div>
                             </li>
+
 
                         </ul>
 
@@ -296,6 +282,16 @@ if (@$_SESSION['Admin']) {
                                 include 'modul/pendapatan/detail_pendapatan.php';
                             } elseif ($act == 'del') {
                                 include 'modul/pendapatan/del_pendapatan.php';
+                            } 
+                        }elseif ($page == 'pengeluaran') {
+                            if ($act == '') {
+                                include 'modul/pengeluaran/data_pengeluaran.php';
+                            } elseif ($act == 'add') {
+                                include 'modul/pengeluaran/add_pengeluaran.php';
+                            } elseif ($act == 'edit') {
+                                include 'modul/pengeluaran/edit_pengeluaran.php';
+                            }elseif ($act == 'del') {
+                                include 'modul/pengeluaran/del_pengeluaran.php';
                             } 
                         } elseif ($page == 'jadwal') {
                             if ($act == '') {
@@ -349,34 +345,17 @@ if (@$_SESSION['Admin']) {
                             } elseif ($act == 'detail') {
                                 include 'modul/absen/detail_absen.php';
                             }
-                        } elseif ($page == 'rekrutmen') {
-                            if ($act == '') {
-                                include 'modul/rekrutmen/data_rekrutmen.php';
-                            } elseif ($act == 'add') {
-                                include 'modul/rekrutmen/add_rekrutmen.php';
-                            } elseif ($act == 'detail') {
-                                include 'modul/rekrutmen/detail_rekrutmen.php';
-                            } elseif ($act == 'aktif') {
-                                include 'modul/rekrutmen/aktif_rekrutmen.php';
-                            } elseif ($act == 'nonaktif') {
-                                include 'modul/rekrutmen/nonaktif_rekrutmen.php';
-                            } elseif ($act == 'pelamar') {
-                                include 'modul/rekrutmen/pelamar_rekrutmen.php';
-                            } elseif ($act == 'del') {
-                                include 'modul/rekrutmen/del_rekrutmen.php';
-                            }
-                        } elseif ($page == 'pinjaman') {
-                            if ($act == '') {
-                                include 'modul/pinjaman/data_pinjaman.php';
-                            } elseif ($act == 'add') {
-                                include 'modul/pinjaman/add_pinjaman.php';
-                            } elseif ($act == 'detail') {
-                                include 'modul/pinjaman/detail_pinjaman.php';
-                            }
                         } elseif ($page == 'profil') {
                             if ($act == '') {
-                                include 'modul/profil/data_profil.php';
-                            }
+                                include 'modul/profil/data_admin.php';
+                            }elseif ($act == 'add') {
+                                include 'modul/profil/add_admin.php';
+                            } elseif ($act == 'edit') {
+                                include 'modul/profil/edit_admin.php';
+                            } elseif ($act == 'del') {
+                                include 'modul/profil/del_admin.php';
+                            } 
+                            
                         } elseif ($page == 'komisi') {
                             if ($act == '') {
                                 include 'modul/komisi/data_komisi.php';
@@ -406,6 +385,8 @@ if (@$_SESSION['Admin']) {
                                 include 'modul/laporan/laporan_pendapatan.php';
                             } elseif ($act == 'gaji') {
                                 include 'modul/laporan/laporan_penggajian.php';
+                            } else if ($act == "pengeluaran") {
+                                include 'modul/laporan/laporan_pengeluaran.php';
                             }
                         } elseif ($page == 'tamu') {
                             if ($act == '') {
@@ -419,6 +400,8 @@ if (@$_SESSION['Admin']) {
                             }elseif ($act == 'del') {
                                 include 'modul/tamu/del_riwayat.php';
                             }
+                        } elseif ($page == 'dashboard') {
+                            include 'modul/dashboard/dashboard.php';
                         } elseif ($page == '') {
                             include 'home.php';
                         } else {

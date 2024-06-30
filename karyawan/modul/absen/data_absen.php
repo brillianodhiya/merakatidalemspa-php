@@ -8,15 +8,15 @@ $jam = date("h:i:sa");
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-2">
-            <h6 class="m-0 font-weight-bold text-primary">Absensi Karyawan</h6>
+            <h6 class="m-0 font-weight-bold " style="color:#800080;">Absensi Karyawan</h6>
         </div>
         <div class="card-body">
             <p style="color: red">Silahkan isi absen setiap hari kerja</p>
-            <div class="container">
+            <div class="container" >
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>Kode Karyawan</label>
-                        <input type="hidden" class="form-control" name="id_karyawan" value="<?= $data['id_karyawan']; ?>" readonly>
+                    <div class="form-group" >
+                        <label >Kode Karyawan</label>
+                        <input type="hidden" class="form-control"  name="id_karyawan" value="<?= $data['id_karyawan']; ?>" readonly>
                         <input type="text" class="form-control" name="kode_karyawan" value="<?= $data['kode_karyawan']; ?>" readonly>
                     </div>
                     <div class="form-group">
@@ -31,8 +31,8 @@ $jam = date("h:i:sa");
                         <label>Waktu</label>
                         <input type="text" class="form-control" name="jam_absensi" value="<?= $jam ?>" readonly>
                     </div>
-                    <button name="saveMasuk" type="submit" class="btn btn-primary mr-2">Absen Masuk</button>
-                    <button name="saveKeluar" type="submit" class="btn btn-success mr-2">Absen Keluar</button>
+                    <button name="saveMasuk" type="submit" class="btn  mr-2" style="background-color:#800080; color:#ffff;">Absen Masuk</button>
+                    <button name="saveKeluar" type="submit" class="btn mr-2" style="background-color:#deb7e8; color:#ffff;">Absen Keluar</button>
                     <a href="?page=absen&act=add" class="btn btn-danger mr-2">Klik tombol ini jika berhalangan hadir/absen</a>
                 </form>
             </div>
