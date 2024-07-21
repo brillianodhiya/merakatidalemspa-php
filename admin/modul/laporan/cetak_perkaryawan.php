@@ -114,6 +114,10 @@ $id = $_GET['id'];
             <td style="width:300px; border: 1.5px solid black; padding: 8px;"><?= rupiah($data['total_absen_izin']) ?> </td>
         </tr>
         <tr>
+            <td style="width:300px; border: 1.5px solid black; padding: 8px;"><strong>Total Keterlambatan</strong></td>
+            <td style="width:300px; border: 1.5px solid black; padding: 8px;"><?= rupiah($data['total_absen_terlambat_rupiah']) ?> </td>
+        </tr>
+        <tr>
             <td style="width:300px; border: 1.5px solid black; padding: 8px;"><strong>Gaji Bersih</strong></td>
             <td style="width:300px; border: 1.5px solid black; padding: 8px;"><?= rupiah($data['total_gaji']); ?></td>
         </tr>

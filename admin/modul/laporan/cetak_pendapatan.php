@@ -31,24 +31,21 @@ $dt2 = $_POST["tgl_2"];
 </center>
 
 <body>
-    <p>Laporan Pendapatan, Periode
-        <?php $a = $dt1;
+    <p>Laporan Pendapatan Periode :
+        <b><?php $a = $dt1;
         echo date("d-M-Y", strtotime($a)) ?>
         s/d
         <?php $b = $dt2;
-        echo date("d-M-Y", strtotime($b)) ?>
+        echo date("d-M-Y", strtotime($b)) ?></b>
     </p>
-    <table width="100%" border="2" style="border-collapse: collapse;" cellpadding="3">
+    <table width="75%" border="2" style="border-collapse: collapse; margin: auto;" cellpadding="3">
         <thead>
             <tr>
                 <th style="border: 2px solid black;">No</th>
                 <th style="border: 2px solid black;">Tanggal</th>
-                <th style="border: 2px solid black;">Nama Tamu</th>
-                <th style="border: 2px solid black;">Karyawan</th>
-                <th style="border: 2px solid black;">Treatment</th>
-                <th style="border: 2px solid black;">Kode Komisi</th>
-                <th style="border: 2px solid black;">Harga</th>
-                <th style="border: 2px solid black;">Potongan</th>
+    
+                <th style="border: 2px solid black;">Pendapatan</th>
+              
                 <th style="border: 2px solid black;">Total</th>
             </tr>
         </thead>
@@ -58,9 +55,7 @@ $dt2 = $_POST["tgl_2"];
             if (isset($_POST["btnCetak"])) {
                 $sql_tampil = "SELECT *
 FROM riwayat_pelanggan
-JOIN tb_karyawan ON riwayat_pelanggan.id_karyawan = tb_karyawan.id_karyawan
-JOIN komhar ON komhar.id_tamu = riwayat_pelanggan.id_tamu
-JOIN komisi ON komhar.id_kom = komisi.id_kom
+
 WHERE riwayat_pelanggan.tanggal_kunjung BETWEEN '$dt1' AND '$dt2' order by tanggal_kunjung asc";
             }
             $query_tampil = mysqli_query($koneksi, $sql_tampil);
@@ -68,18 +63,15 @@ WHERE riwayat_pelanggan.tanggal_kunjung BETWEEN '$dt1' AND '$dt2' order by tangg
             while ($data = mysqli_fetch_array($query_tampil, MYSQLI_BOTH)) {
             ?>
                 <tr>
-                    <td style="border: 2px solid black;"><?= $no++; ?>.</td>
-                    <td style="border: 2px solid black;"><?= date('d-m-Y', strtotime(($data['tanggal_kunjung']))); ?></td>
-                    <td style="border: 2px solid black;"><?= $data['nama_tamu'] ?> </td>
-                    <td style="border: 2px solid black;"><?= $data['nama_karyawan'] ?> </td>
-                    <td style="border: 2px solid black;"><?= $data['treatment'] ?> </td>
-                    <td style="border: 2px solid black;"><?= $data['kode_komisi'] ?> </td>
-                    <td style="border: 2px solid black;"><?= rupiah($data['harga']) ?> </td>
-                    <td style="border: 2px solid black;"><?= rupiah($data['potongan']) ?> </td>
+                    <td style="border: 2px solid black;"><center><?= $no++; ?>.</center></td>
+                    <td style="border: 2px solid black;"><center><?= date('d-m-Y', strtotime(($data['tanggal_kunjung']))); ?></center></td>
+                   
+                    <td style="border: 2px solid black;"><?= $data['treatment'] ?></td>
+                    
                     <td style="border: 2px solid black;">
-                        <?php
+                    <center> <?php
                         echo rupiah($data['total']);
-                        ?>
+                        ?></center>
                     </td>
 
                 </tr>
@@ -90,12 +82,12 @@ WHERE riwayat_pelanggan.tanggal_kunjung BETWEEN '$dt1' AND '$dt2' order by tangg
         </tbody>
     </table>
     <br>
-    Total Pendapatan, Periode
-        <?php $a = $dt1;
+    Total Pendapatan Periode :
+        <b><?php $a = $dt1;
         echo date("d-M-Y", strtotime($a)) ?>
         s/d
         <?php $b = $dt2;
-        echo date("d-M-Y", strtotime($b)) ?>
+        echo date("d-M-Y", strtotime($b)) ?></b>
     <?php
     $totalPendapatan = mysqli_query($koneksi, "SELECT SUM(total) AS total_pendapatan FROM riwayat_pelanggan WHERE tanggal_kunjung BETWEEN '$dt1' AND '$dt2'");
     ?>

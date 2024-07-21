@@ -37,14 +37,14 @@ $pendapatan = $totalPendapatan->fetch_assoc()['total_pendapatan'];
 $pendapatan = $pendapatan ? $pendapatan : 0;
 $prive = $pendapatan * 0.3;
 $pengeluaran = $totalPengeluaran->fetch_assoc()['total_pengeluaran'];
-$totalPendapatanKeseluruhan = $pendapatan - $prive - $pengeluaran;
-
+$totalPendapatanKeseluruhan = $pendapatan - $prive ;
 $kas = $pendapatan + 
     $modal - 
     $peralatan - 
     $prive - 
     $totalBebanGaji - 
     $pengeluaran;
+$totalPengeluaranKeseluruhan = $pengeluaran + $kas + $totalBebanGaji;
 ?>
 <h2 style="text-align: center;"><?= rupiah($totalPendapatanKeseluruhan) ?></h2>
 </div>
@@ -52,7 +52,7 @@ $kas = $pendapatan +
 <div class="card shadow mb-4 p-2" style="min-width: 300px;">
 <h5 class="card-header text-center">Total Pengeluaran</h5>
 
-<h2 style="text-align: center;"><?= rupiah($pengeluaran) ?></h2>
+<h2 style="text-align: center;"><?= rupiah($totalPengeluaranKeseluruhan) ?></h2>
 </div>
 
 <div class="card shadow mb-4 p-2" style="min-width: 300px;">

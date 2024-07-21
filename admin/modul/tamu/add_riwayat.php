@@ -33,8 +33,17 @@ $level = "admin";
                     </div>
                     <div class="form-group">
                         <label>Treatment</label>
-                        <input type="text" class="form-control" 
-                        placeholder="Masukkan Treatment" name="treatment" required="required">
+                        <select class="form-control" name="treatment" onchange="getHarga()" id="treatment">
+                            
+                            <?php
+                            $komisi = mysqli_query($koneksi, "SELECT * FROM pricelist");
+                            foreach($komisi as $k){?>
+                            <option value="<?= $k['id_price']; ?>" harga="<?= $k['harga'] ?>"><?= $k['nama_treatment']; ?></option>
+                            <?php 
+                        }
+                            ?>
+                            
+                        </select>
                         </div>
                     <div class="form-group">
                         <label>Masalah</label>
@@ -57,7 +66,7 @@ $level = "admin";
                     </div>
                     <div class="form-group">
                         <label>Harga Treatment</label>
-                        <input type="text" class="form-control" 
+                        <input readonly type="text" class="form-control" id="harga"
                         placeholder="Masukkan Harga Treatment" name="harga" required="required">
                     </div>
                     <div class="form-group">
@@ -113,3 +122,12 @@ if (isset($_POST['saveTamu'])) {
 }
 
 ?>
+
+<script>
+    const getHarga = () => {
+        const treatment = document.getElementById('treatment');
+        const harga = document.getElementById('harga');
+        const selectedHarga = treatment.options[treatment.selectedIndex].getAttribute('harga');
+        harga.value = selectedHarga;
+    }
+</script>
