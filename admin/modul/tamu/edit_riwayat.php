@@ -29,7 +29,20 @@ while ($d = mysqli_fetch_array($data)) {
                         </div>
                         <div class="form-group">
                             <label>Treatment</label>
-                            <input name="treatment" type="text" class="form-control" value="<?php echo $d['treatment']; ?>">
+                            <!-- <input name="treatment" type="text" class="form-control" value="<?php echo $d['treatment']; ?>"> -->
+                            <select class="form-control" name="treatment" onchange="getHarga()" id="treatment">
+                            
+                            <?php
+                            $komisi = mysqli_query($koneksi, "SELECT * FROM pricelist");
+                            foreach($komisi as $k){?>
+                            <option value="<?= $k['nama_treatment']; ?>" harga="<?= $k['harga'] ?>" 
+                            <?php if($d['treatment'] == $k['nama_treatment']) echo 'selected'; ?>>
+                            <?= $k['nama_treatment']; ?></option>
+                            <?php 
+                        }
+                            ?>
+                            
+                        </select>
                         </div>
                         <div class="form-group">
                             <label>Malasah</label>
@@ -100,5 +113,13 @@ if (isset($_POST['updateTamu'])) {
 ?>
 
 </body>
+<script>
+    const getHarga = () => {
+        const treatment = document.getElementById('treatment');
+        const harga = document.getElementById('harga');
+        const selectedHarga = treatment.options[treatment.selectedIndex].getAttribute('harga');
+        harga.value = selectedHarga;
+    }
+</script>
 
 </html>

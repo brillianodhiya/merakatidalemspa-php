@@ -38,7 +38,7 @@ $level = "admin";
                             <?php
                             $komisi = mysqli_query($koneksi, "SELECT * FROM pricelist");
                             foreach($komisi as $k){?>
-                            <option value="<?= $k['id_price']; ?>" harga="<?= $k['harga'] ?>"><?= $k['nama_treatment']; ?></option>
+                            <option value="<?= $k['nama_treatment']; ?>" harga="<?= $k['harga'] ?>"><?= $k['nama_treatment']; ?></option>
                             <?php 
                         }
                             ?>
