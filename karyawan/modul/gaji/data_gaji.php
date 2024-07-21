@@ -32,6 +32,7 @@ if (isset($_SESSION['Karyawan'])) {
                                 <th>Opsi</th>
                             </tr>
                         </thead>
+                        <tbody>
                         <?php
                         $no = 1;
                         $data = mysqli_query($koneksi, "SELECT * FROM tb_gaji INNER JOIN tb_karyawan 
@@ -39,7 +40,6 @@ if (isset($_SESSION['Karyawan'])) {
                         WHERE tb_gaji.id_karyawan = '$user_id'");
                         while ($d = mysqli_fetch_array($data)) {
                         ?>
-                            <tbody>
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><?= $d['tgl_gaji']; ?></td>

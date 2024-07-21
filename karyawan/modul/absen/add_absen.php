@@ -2,7 +2,7 @@
 $tgl = date('d-m-Y');
 ?>
 <?php
-$jam = date("h:i:sa");
+$jam = date("H:i");
 ?>
 <div class="container">
     <div class="card shadow mb-4">

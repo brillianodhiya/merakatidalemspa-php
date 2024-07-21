@@ -2,7 +2,7 @@
 $tgl = date('d-m-Y');
 ?>
 <?php
-$jam = date("h:i:sa");
+$jam = date("H:i");
 ?>
 
 <div class="container">
@@ -47,8 +47,8 @@ $jam = date("h:i:sa");
 if (isset($_POST['saveMasuk'])) {
     $id             = $_POST['id_karyawan'];
     $date           = date('Y-m-d');
-    $jam1            = date("h:i:sa");
-    $jam2            = date("h:i:sa");
+    $jam1            = date("H:i");
+    $jam2            = date("H:i");
     $ket            = $_POST['keterangan'];
     $status         = 'hadir';
     $valid         = 'N';
@@ -84,8 +84,8 @@ if (isset($_POST['saveKeluar'])) {
     $datenow        = date('d');
     $id             = $_POST['id_karyawan'];
     $date           = date('Y-m-d');
-    $jam1            = date("h:i:sa");
-    $jam2            = date("h:i:sa");
+    $jam1            = date("H:i");
+    $jam2            = date("H:i");
     $ket            = $_POST['keterangan'];
     $status         = 'hadir';
     $valid          = 'N';

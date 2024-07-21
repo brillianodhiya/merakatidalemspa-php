@@ -89,6 +89,18 @@ WHERE riwayat_pelanggan.tanggal_kunjung BETWEEN '$dt1' AND '$dt2' order by tangg
             ?>
         </tbody>
     </table>
+    <br>
+    Total Pendapatan, Periode
+        <?php $a = $dt1;
+        echo date("d-M-Y", strtotime($a)) ?>
+        s/d
+        <?php $b = $dt2;
+        echo date("d-M-Y", strtotime($b)) ?>
+    <?php
+    $totalPendapatan = mysqli_query($koneksi, "SELECT SUM(total) AS total_pendapatan FROM riwayat_pelanggan WHERE tanggal_kunjung BETWEEN '$dt1' AND '$dt2'");
+    ?>
+    <h2 style=""><?= rupiah($totalPendapatan->fetch_assoc()['total_pendapatan']) ?></h2>
+
 
 </body>
 

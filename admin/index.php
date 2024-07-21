@@ -117,6 +117,13 @@ if (@$_SESSION['Admin']) {
     <span class="tulisancoba">Riwayat Pelanggan</span></a>
 </li>
 
+<!-- Nav Item - riwayat pelanggan -->
+<li class="nav-item ">
+  <a class="nav-link" href="?page=pricelist">
+    <i class="fas fa-fw fa-chart-area tulisancoba"></i>
+    <span class="tulisancoba">Pricelist</span></a>
+</li>
+
 <!-- Nav Item - karyawan -->
 <li class="nav-item">
   <a class="nav-link collapsed tulisancoba" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -161,7 +168,8 @@ if (@$_SESSION['Admin']) {
       <!-- <h6 class="collapse-header">Login Screens:</h6> -->
       <a class="collapse-item" href="?page=laporan">Pendapatan Bulanan</a>
       <a class="collapse-item" href="?page=laporan&act=pengeluaran">Pengeluaran Bulanan</a>
-      <a class="collapse-item" href="?page=gaji&act=">Gaji Kryawan</a>
+      <a class="collapse-item" href="?page=laporan&act=keuangan">Laporan Keuangan</a>
+      <a class="collapse-item" href="?page=gaji&act=">Gaji Karyawan</a>
     </div>
   </div>
 </li>
@@ -387,6 +395,8 @@ if (@$_SESSION['Admin']) {
                                 include 'modul/laporan/laporan_penggajian.php';
                             } else if ($act == "pengeluaran") {
                                 include 'modul/laporan/laporan_pengeluaran.php';
+                            } else if ($act == "keuangan") {
+                                include 'modul/laporan/laporan_keuangan.php';
                             }
                         } elseif ($page == 'tamu') {
                             if ($act == '') {
@@ -400,10 +410,22 @@ if (@$_SESSION['Admin']) {
                             }elseif ($act == 'del') {
                                 include 'modul/tamu/del_riwayat.php';
                             }
+
+                        } elseif ($page == 'pricelist') {
+                            if ($act == '') {
+                                include 'modul/pricelist/pricelist.php';
+                            } elseif ($act == 'add') {
+                                include 'modul/pricelist/add_pricelist.php';
+                            }elseif ($act == 'edit') {
+                                include 'modul/pricelist/edit_pricelist.php';
+                            }elseif ($act == 'del') {
+                                include 'modul/pricelist/delete_pricelist.php';
+                            }
+
                         } elseif ($page == 'dashboard') {
                             include 'modul/dashboard/dashboard.php';
                         } elseif ($page == '') {
-                            include 'home.php';
+                            include 'modul/dashboard/dashboard.php';
                         } else {
                             echo "<b>404!</b> Tidak ada halaman !";
                         }

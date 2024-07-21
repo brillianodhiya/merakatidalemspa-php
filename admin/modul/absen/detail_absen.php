@@ -35,7 +35,7 @@ while ($d = mysqli_fetch_array($data)) {
                             <tr>
                                 <th>Tanggal</th>
                                 <th>:</th>
-                                <th><?= strftime('%A, %d %B %Y', strtotime(($d['tgl_absensi']))); ?></th>
+                                <th><?= $d['tgl_absensi']; ?></th>
                             </tr>
                             <tr>
                                 <th>Status</th>

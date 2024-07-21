@@ -25,8 +25,9 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        $sql = mysqli_query($koneksi, "SELECT * FROM riwayat_pelanggan INNER JOIN tb_karyawan 
-                        ON riwayat_pelanggan.id_karyawan = tb_karyawan.id_karyawan");
+                        $sql = mysqli_query($koneksi, "SELECT riwayat_pelanggan.*, tb_karyawan.nama_karyawan
+FROM riwayat_pelanggan
+INNER JOIN tb_karyawan ON riwayat_pelanggan.id_karyawan = tb_karyawan.id_karyawan");
              
                         foreach ($sql as $d) { ?>
                             <tr>

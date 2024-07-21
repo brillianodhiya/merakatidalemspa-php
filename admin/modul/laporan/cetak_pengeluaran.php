@@ -73,7 +73,18 @@ WHERE tanggal_keluar BETWEEN '$dt1' AND '$dt2' order by tanggal_keluar asc";
             ?>
         </tbody>
     </table>
-
+    <br>
+    Total Pengeluaran, Periode
+        <?php $a = $dt1;
+        echo date("d-M-Y", strtotime($a)) ?>
+        s/d
+        <?php $b = $dt2;
+        echo date("d-M-Y", strtotime($b)) ?>
+    <?php
+    $totalPengeluaran =
+        mysqli_query($koneksi, "SELECT SUM(jumlah) AS total_pengeluaran FROM pengeluaran WHERE tanggal_keluar BETWEEN '$dt1' AND '$dt2'");
+    ?>
+    <h2 style=""><?= rupiah($totalPengeluaran->fetch_assoc()['total_pengeluaran']) ?></h2>
 </body>
 
 

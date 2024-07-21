@@ -94,17 +94,53 @@ if ($cek == 0) {
         $totalMasuk = 0;
         $totalIzin = 0;
         $totalTidakValid = 0;
+        $totalPengurangan = 0;
+        $totalWaktuTelatDalamMenit = 0;
         while ($abs = mysqli_fetch_array($absensiQuery)) {
             # code...
             if ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] == 'hadir') {
+                $jam_masuk = $abs['jam_masuk'];
+                $jam_keluar = $abs['jam_keluar'];
+                // jika jam keluar kosong gunakan jam 20:00:00
+                if ($jam_keluar == "") {
+                    $jam_keluar = "20:00:00";
+                }
                 if ($totalMasuk <= 25) {
                     $totalMasuk++;
                 }
+                // jika jam masuk melebihi jam 9:00 maka akan dihitung terlambat
+                // contoh jika masuk jam 9:40 menit maka akan dihitung terlambat 40 menit
+                // jam keluar melebihi dihitung maksimal jam 20:00 jika lebih maka tidak ada denda absen keluar 
+                // ada pengurangan 10000 per 30 menit keterlambatan absen masuk
+                // tambahkan perhitungan per 30 menit nya juga
+                $telat = strtotime($jam_masuk) - strtotime("09:00:00");
+                $telat = $telat / 60;
+                if ($telat > 0) {
+                    $totalWaktuTelatDalamMenit += ceil($telat);
+                    $totalPengurangan += ceil($telat/30)*10000;
+                }
+                // jika jam keluar terdeteksi sebelum jam 20:00:00
+                // maka akan dihitung telat dan juga dikenakan pemotongan per 30 menitnya
+                if ($jam_keluar < "18:00:00") {
+                    $telat = strtotime("20:00:00") - strtotime($jam_keluar);
+                    $telat = $telat / 60;
+                    if ($telat > 0) {
+                        $totalWaktuTelatDalamMenit += ceil($telat);
+                        $totalPengurangan += ceil($telat/30)*10000;
+                    }
+                }
+                
+               
             } elseif ($abs['valid_absensi'] == "Y" && $abs['status_absensi'] != 'hadir') {
                 $totalIzin++;
             } elseif ($abs['valid_absensi'] == "N") {
                 $totalTidakValid++;
             }
+        }
+
+        // jika totalMasuk + totalIzin + totalTidakValid < 26 maka sisanya akan masuk ke izin
+        if ($totalMasuk + $totalIzin + $totalTidakValid < 25) {
+            $totalIzin += 25 - ($totalMasuk + $totalIzin + $totalTidakValid);
         }
 
         // buat query mengambil data dari table riwayat_pelanggan dengan Where id_karyawan dan bulan nya sekarang, dan juga lakukan join dengan table komhar menggunakan id_tamu sebagai foreign_key untuk kemudian mengambil total_komisi
@@ -190,26 +226,31 @@ if ($cek == 0) {
                                                     <input type="hidden" class="form-control" name="kode_karyawan" id="kode_karyawan" value="<?= $id ?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Gaji Absen Masuk (<?= $totalMasuk ?> hari x Rp10.000)</label>
+                                                    <label id="gaji_absen_masuk_label">Gaji Absen Masuk (<?= $totalMasuk ?> hari x Rp10.000)</label>
                                                     <input type="hidden" class="form-control" name="total_count_masuk" id="total_count_masuk" value="<?= $totalMasuk ?>">
                                                     <input type="number" class="form-control" name="gaji_absen_masuk" id="gaji_absen_masuk" value="<?= $totalGajiMasuk ?>" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Komisi (<?=  $countKomisi ?>)</label>
+                                                    <label id="komisi_label">Komisi (<?=  $countKomisi ?>)</label>
                                                     <input type="hidden" class="form-control" name="total_count_komisi" id="total_count_komisi" value="<?= $countKomisi ?>">
                                                     <input type="hidden" class="form-control" name="keterangan_komisi" id="keterangan_komisi" value="<?= $kalimatkomisi ?>">
                                                     <input type="number" class="form-control" name="komisi" id="komisi" value="<?= $totalKomisi ?>" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Absen Izin (<?=  $totalCountIzinDanTidakValid ?> hari)</label>
+                                                    <label id="absen_izin_label">Absen Izin (<?=  $totalCountIzinDanTidakValid ?> hari)</label>
                                                     <input type="hidden" class="form-control" name="total_count_izin" id="total_count_izin" value="<?= $totalCountIzinDanTidakValid ?>">
                                                     <input type="number" class="form-control" name="izin" id="izin" value="<?= $totalGajiIzin ?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="absen_keterlambatan_label">Absen Keterlambatan 10rb/30menit (<?= $totalWaktuTelatDalamMenit ?>menit)</label>
+                                                    <input type="hidden" class="form-control" name="terlambat_dalam_menit" id="terlambat_dalam_menit" value="<?= $totalWaktuTelatDalamMenit ?>">
+                                                    <input type="number" class="form-control" name="keterlambatan" id="keterlambatan" value="<?= $totalPengurangan ?>" readonly>
                                                 </div>
                                                 <!-- total form -->
                                                 <div class="form-group
                                                 ">
-                                                    <label>Total Gaji</label>
-                                                    <input type="number" class="form-control" name="total_gaji" id="total_gaji" value="<?= ($gajiPok + $totalGajiMasuk + $totalKomisi) - $totalGajiIzin ?>" readonly>
+                                                    <label id="total_gaji_label">Total Gaji</label>
+                                                    <input type="number" class="form-control" name="total_gaji" id="total_gaji" value="<?= ($gajiPok + $totalGajiMasuk + $totalKomisi) - $totalGajiIzin - $totalPengurangan ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -283,9 +324,11 @@ if (isset($_POST['saveGaji'])) {
     $total_gaji = $_POST['total_gaji'];
     $absen_masuk_count = $_POST['total_count_masuk'];
     $keterangan_komisi = $_POST['keterangan_komisi'];
+    $totalTerlambatDalamMenit = $_POST['terlambat_dalam_menit'];
+    $keterlambatan = $_POST['keterlambatan'];
 
     //query INSERT disini
-    $save = mysqli_query($koneksi, "INSERT INTO tb_gaji VALUES(NULL,'$tgl_gaji','$id','$potongan','$gapok','$tunjangan','$bonus', '$gaji_absen_masuk', '$komisi', '$keterangan_komisi', '$absen_izin_count', '$total_absen_izin', '$total_gaji', '$absen_masuk_count')");
+    $save = mysqli_query($koneksi, "INSERT INTO tb_gaji VALUES(NULL,'$tgl_gaji','$id','$potongan','$gapok','$tunjangan','$bonus', '$gaji_absen_masuk', '$komisi', '$keterangan_komisi', '$absen_izin_count', '$total_absen_izin', '$total_gaji', '$absen_masuk_count', '$totalTerlambatDalamMenit', '$keterlambatan')");
 
     if ($save) {
         echo " <script>
@@ -349,6 +392,17 @@ if (isset($_POST['saveGaji'])) {
                 document.getElementById('total_count_komisi').value = data.countKomisi;
                 document.getElementById('keterangan_komisi').value = data.kalimatkomisi;
                 document.getElementById('total_gaji').value = data.totalGaji;
+                document.getElementById('keterlambatan').value = data.totalPengurangan;
+                document.getElementById('terlambat_dalam_menit').value = data.totalWaktuTelatDalamMenit;
+                document.getElementById("gaji_absen_masuk_label").innerHTML = "Gaji Absen Masuk (" + data.totalMasuk + " hari x Rp10.000)";
+                document.getElementById("komisi_label").innerHTML = "Komisi (" + data.countKomisi + ")";
+                document.getElementById("absen_izin_label").innerHTML = "Absen Izin (" + data.totalCountIzinDanTidakValid + " hari)";
+                document.getElementById("absen_keterlambatan_label").innerHTML = "Absen Keterlambatan 10rb/30menit (" + data.totalWaktuTelatDalamMenit + "menit)";
+
+                // document.getElementById("total_gaji_label").innerHTML = "Total Gaji (" + data.totalMas
+                // + " hari x Rp10.000) + " + data.totalKomisi + " +
+                // " - " + data.totalGajiIzin + " - " + data.totalPengurangan;
+
             }
         });
 
